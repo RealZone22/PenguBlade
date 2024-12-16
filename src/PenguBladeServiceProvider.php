@@ -2,9 +2,9 @@
 
 namespace realzone22\PenguBlade;
 
+use realzone22\PenguBlade\Commands\PenguBladeCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use realzone22\PenguBlade\Commands\PenguBladeCommand;
 
 class PenguBladeServiceProvider extends PackageServiceProvider
 {
