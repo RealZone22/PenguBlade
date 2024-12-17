@@ -1,5 +1,5 @@
 <?php
 
-namespace realzone22\PenguBlade;
+namespace RealZone22\PenguBlade;
 
 class PenguBlade {}
