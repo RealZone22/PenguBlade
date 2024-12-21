@@ -30,10 +30,10 @@
     </div>
 </div>
 
-@if($attributes->whereStartsWith('wire:model')->first() && $errors->has($attributes->whereStartsWith('wire:model')->first()))
-    <div class="text-red-600 text-sm">{{ $errors->first($attributes->whereStartsWith('wire:model')->first()) }}</div>
-@endif
-
 @if($hint)
     <p class="mt-2 text-sm text-gray-500 dark:text-neutral-500">{{ $hint }}</p>
+@endif
+
+@if($attributes->whereStartsWith('wire:model')->first() && $errors->has($attributes->whereStartsWith('wire:model')->first()))
+    <div class="text-red-600 text-sm">{{ $errors->first($attributes->whereStartsWith('wire:model')->first()) }}</div>
 @endif
