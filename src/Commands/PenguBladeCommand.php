@@ -1,6 +1,6 @@
 <?php
 
-namespace realzone22\PenguBlade\Commands;
+namespace RealZone22\PenguBlade\Commands;
 
 use Illuminate\Console\Command;
 

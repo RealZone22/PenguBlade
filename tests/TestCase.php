@@ -1,10 +1,10 @@
 <?php
 
-namespace realzone22\PenguBlade\Tests;
+namespace RealZone22\PenguBlade\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use realzone22\PenguBlade\PenguBladeServiceProvider;
+use RealZone22\PenguBlade\PenguBladeServiceProvider;
 
 class TestCase extends Orchestra
 {

@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.4",
+        "php": "^8.2",
         "livewire/livewire": "^3.5",
         "gehrisandro/tailwind-merge-laravel": "^1.2",
         "feature-ninja/cva": "^0.3.0",
@@ -38,13 +38,13 @@
     },
     "autoload": {
         "psr-4": {
-            "realzone22\\PenguBlade\\": "src/",
-            "realzone22\\PenguBlade\\Database\\Factories\\": "database/factories/"
+            "RealZone22\\PenguBlade\\": "src/",
+            "RealZone22\\PenguBlade\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "realzone22\\PenguBlade\\Tests\\": "tests/",
+            "RealZone22\\PenguBlade\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -66,10 +66,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "realzone22\\PenguBlade\\PenguBladeServiceProvider"
+                "RealZone22\\PenguBlade\\PenguBladeServiceProvider"
             ],
             "aliases": {
-                "PenguBlade": "realzone22\\PenguBlade\\Facades\\PenguBlade"
+                "PenguBlade": "RealZone22\\PenguBlade\\Facades\\PenguBlade"
             }
         }
     },
