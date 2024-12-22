@@ -1,3 +1,7 @@
-<div x-data="{modalIsOpen: true}">
+@props([
+    'defaultOpen' => false,
+])
+
+<div x-data="{modalIsOpen: {{ $defaultOpen }}}">
     {{ $slot }}
 </div>
