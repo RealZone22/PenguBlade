@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-The following versions of Laravel-Template are receiving active support and maintenance. Any security vulnerabilities
+The following versions of PenguBlade are receiving active support and maintenance. Any security vulnerabilities
 discovered must be reproducible in supported versions.
 
 | Version | Supported          |
