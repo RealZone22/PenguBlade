@@ -32,11 +32,11 @@ class PenguBladeServiceProvider extends PackageServiceProvider
             __DIR__.'/../src/Livewire' => app_path('Livewire'),
         ], 'pengublade-components');
 
-        $dirs = array_filter(glob(__DIR__ . '/../resources/views/components/*'), 'is_dir');
+        $dirs = array_filter(glob(__DIR__.'/../resources/views/components/*'), 'is_dir');
         foreach ($dirs as $dir) {
             $this->publishes([
-                $dir => resource_path('views/components/' . basename($dir)),
-            ], 'pengublade-components-' . basename($dir));
+                $dir => resource_path('views/components/'.basename($dir)),
+            ], 'pengublade-components-'.basename($dir));
         }
     }
 }
