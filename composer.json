@@ -1,6 +1,6 @@
 {
     "name": "realzone22/pengublade",
-    "description": "This is my package pengublade",
+    "description": "Blade components for Penguin UI",
     "keywords": [
         "blade",
         "livewire",
@@ -12,7 +12,8 @@
     "authors": [
         {
             "name": "Lenny P. | RealZone22",
-            "email": "lenny@petschl.org"
+            "email": "lenny@petschl.org",
+            "homepage": "https://realzone22.de"
         }
     ],
     "require": {
@@ -38,8 +39,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RealZone22\\PenguBlade\\": "src/",
-            "RealZone22\\PenguBlade\\Database\\Factories\\": "database/factories/"
+            "RealZone22\\PenguBlade\\": "src/"
         }
     },
     "autoload-dev": {
@@ -73,6 +73,6 @@
             }
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
