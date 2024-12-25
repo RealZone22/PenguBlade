@@ -28,16 +28,16 @@ class PenguBladeServiceProvider extends PackageServiceProvider
     {
         $this->publishes([
             __DIR__.'/../resources/views/components' => resource_path('views/components'),
-            __DIR__ . '/../src/Services' => app_path('Services'),
+            __DIR__.'/../src/Services' => app_path('Services'),
             //     __DIR__.'/../resources/views/livewire' => resource_path('views/vendor/pengublade/livewire'),
             //     __DIR__.'/../src/Livewire' => app_path('Livewire'),
         ], 'pengublade-components');
 
-        $dirs = array_filter(glob(__DIR__ . '/../resources/views/components/*'), 'is_dir');
+        $dirs = array_filter(glob(__DIR__.'/../resources/views/components/*'), 'is_dir');
         foreach ($dirs as $dir) {
             $this->publishes([
-                $dir => resource_path('views/components/' . basename($dir)),
-            ], 'pengublade-components-' . basename($dir));
+                $dir => resource_path('views/components/'.basename($dir)),
+            ], 'pengublade-components-'.basename($dir));
         }
     }
 }
