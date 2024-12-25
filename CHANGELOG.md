@@ -2,6 +2,15 @@
 
 All notable changes to `PenguBlade` will be documented in this file.
 
+## 0.1.1 - 2024-12-25
+
+### What's Changed
+
+* Move modal is open div to index.blade.php by @RealZone22 in https://github.com/RealZone22/PenguBlade/pull/5
+* Fix livewire paths not found
+
+**Full Changelog**: https://github.com/RealZone22/PenguBlade/compare/0.1.0...0.1.1
+
 ## 0.1.0 - 2024-12-23
 
 ### What's Changed
