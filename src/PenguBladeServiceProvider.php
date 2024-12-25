@@ -18,8 +18,7 @@ class PenguBladeServiceProvider extends PackageServiceProvider
         $package
             ->name('pengublade')
             ->hasConfigFile()
-            ->hasViews('pengublade')
-            ->hasCommand(PenguBladeCommand::class);
+            ->hasViews('pengublade');
 
         $this->registerComponents();
     }
