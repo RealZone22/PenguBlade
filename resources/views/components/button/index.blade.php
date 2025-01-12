@@ -1,5 +1,5 @@
 @props([
-    'variant' => null,
+    'variant' => 'solid',
     'color' => 'primary',
     'link' => null,
     'loading' => null,
