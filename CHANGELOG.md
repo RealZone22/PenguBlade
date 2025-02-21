@@ -2,6 +2,16 @@
 
 All notable changes to `PenguBlade` will be documented in this file.
 
+## 0.2.0 - 2025-02-21
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/RealZone22/PenguBlade/pull/6
+* Bump aglipanci/laravel-pint-action from 2.4 to 2.5 by @dependabot in https://github.com/RealZone22/PenguBlade/pull/7
+* Style fixes and improvements https://github.com/RealZone22/PenguBlade/commit/fe78fca
+
+**Full Changelog**: https://github.com/RealZone22/PenguBlade/compare/0.1.1...0.2.0
+
 ## 0.1.2 - 2024-12-25
 
 * Fix command not found
