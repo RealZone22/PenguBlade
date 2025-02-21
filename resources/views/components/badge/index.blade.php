@@ -2,7 +2,7 @@
     'color' => 'default',
 ])
 
-@inject('badgeService', 'RealZone22\PenguBlade\Services\PenguBlade\BadgeCvaService')
+@inject('badgeService', 'App\Services\PenguBlade\BadgeCvaService')
 
 <span {{ $attributes->twMerge($badgeService::new()(['color' => $color])) }}>
     {{ $slot }}

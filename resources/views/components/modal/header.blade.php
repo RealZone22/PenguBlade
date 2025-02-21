@@ -1,5 +1,6 @@
 @props([
     'showCloseButton' => true,
+    'useWireModal' => true,
     'closeIcon' => 'icon-x'
 ])
 
@@ -8,7 +9,8 @@
         {{ $slot }}
     </h3>
     @if($showCloseButton)
-        <button @click="modalIsOpen = false" aria-label="close modal">
+        <button @if($useWireModal) wire:click="closeModal" @else @click="modalIsOpen = false" @endif
+        aria-label="close modal" class="cursor-pointer">
             <i class="{{ $closeIcon }}"></i>
         </button>
     @endif

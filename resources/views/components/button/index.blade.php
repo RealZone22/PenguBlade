@@ -23,16 +23,14 @@
 @inject('spinnerService', 'RealZone22\PenguBlade\Services\PenguBlade\SpinnerCvaService')
 
 @if($link)
-    <a {{ $attributes->twMerge($buttonService::new()([$variant => $color])) }} href="{{ $link }}"
-       @if($loading)
-           wire:target="{{ loadingTarget($attributes, $loading) }}"
-       wire:loading.attr="disabled"
-        @endif
-    >
+    <a {{ $attributes->twMerge($buttonService::new()([$variant => $color])) }} href="{{ $link }}">
         {{ $slot }}
     </a>
 @else
     <button {{ $attributes->twMerge($buttonService::new()([$variant => $color])) }}
+            @if(!$attributes->whereStartsWith('type')->first())
+                type="button"
+            @endif
             @if($loading)
                 wire:target="{{ loadingTarget($attributes, $loading) }}"
             wire:loading.attr="disabled"
@@ -41,7 +39,7 @@
         @if($loading)
             <svg wire:loading wire:target="{{ loadingTarget($attributes, $loading) }}"
                  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                 class="{{ $spinnerService::new()(['color' => $color]) }}">
+                 class="{{ $spinnerService::new()(['button' => $color]) }}">
                 <path opacity="0.25"
                       d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"/>
                 <path

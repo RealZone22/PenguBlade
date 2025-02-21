@@ -22,10 +22,18 @@ class SpinnerCvaService
                         'warning' => 'fill-amber-500 dark:fill-amber-500',
                         'success' => 'fill-green-500 dark:fill-green-500',
                     ],
+                    'button' => [
+                        'primary' => 'fill-neutral-100 dark:fill-black',
+                        'secondary' => 'fill-white dark:fill-black',
+                        'alternate' => 'fill-neutral-900 dark:fill-white',
+                        'inverse' => 'fill-neutral-300 dark:fill-neutral-600',
+                        'info' => 'fill-white dark:fill-white',
+                        'danger' => 'fill-white dark:fill-white',
+                        'warning' => 'fill-white dark:fill-white',
+                        'success' => 'fill-white dark:fill-white',
+                    ],
                 ],
-                'defaultVariants' => [
-                    'color' => 'primary',
-                ],
+                'defaultVariants' => [],
             ],
         );
     }

@@ -1,11 +1,11 @@
 @props([
-    'uuid' => 'pengublade-combobox-' . str()->uuid(),
     'label' => null,
     'selectText' => 'Please Select',
     'options' => [],
 ])
 
 <div x-data="{
+        uuid: Math.random().toString(20).substring(2, 20),
         options: {{ json_encode($options) }},
         isOpen: false,
         openedWithKeyboard: false,
@@ -51,15 +51,15 @@
     }" class="w-full max-w-xs flex flex-col gap-1"
      x-on:keydown="highlightFirstMatchingOption($event.key)"
      x-on:keydown.esc.window="isOpen = false, openedWithKeyboard = false">
-    <label for="{{ $uuid }}" class="w-fit pl-0.5 text-sm text-neutral-600 dark:text-neutral-300">
+    <label x-bind:for="uuid" class="w-fit pl-0.5 text-sm text-neutral-600 dark:text-neutral-300">
         {{ $label }}
     </label>
-    <div class="relative" x-data="{ uuid: '{{ $uuid }}' }">
+    <div class="relative">
 
         {{ $slot }}
 
         <!-- Bind the hidden input to the selectedOptions array -->
-        <input id="{{ $uuid }}" type="hidden" x-ref="hiddenTextField"
+        <input x-bind:id="uuid" type="hidden" x-ref="hiddenTextField"
                :value="JSON.stringify(selectedOptions)"/>
     </div>
 </div>

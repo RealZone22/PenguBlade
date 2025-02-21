@@ -13,10 +13,10 @@ class AlertCvaService
             [
                 'variants' => [
                     'color' => [
-                        'info' => 'bg-sky-500/10 p-4',
-                        'success' => 'bg-green-500/10',
-                        'warning' => 'bg-amber-500/10',
-                        'error' => 'bg-red-500/10',
+                        'info' => 'bg-sky-500/70',
+                        'success' => 'bg-green-500/70',
+                        'warning' => 'bg-amber-500/70',
+                        'error' => 'bg-red-500/70',
                     ],
                 ],
                 'defaultVariants' => [
