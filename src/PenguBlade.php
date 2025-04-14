@@ -2,6 +2,4 @@
 
 namespace RealZone22\PenguBlade;
 
-class PenguBlade
-{
-}
+class PenguBlade {}
