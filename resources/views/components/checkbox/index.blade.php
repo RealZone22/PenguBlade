@@ -51,7 +51,7 @@ $sizeClass = match ($size) {
             {{ $slot }}
 
             @if($attributes->get('required') && $showRequired)
-                <span class="text-red-600">*</span>
+                <span class="text-danger">*</span>
             @endif
         </span>
     </label>
@@ -66,6 +66,6 @@ $sizeClass = match ($size) {
 
     @if($attributes->whereStartsWith('wire:model')->first() && $errors->has($attributes->whereStartsWith('wire:model')->first()) && $showValidation)
         <div
-            class="text-red-600 text-sm">{{ $errors->first($attributes->whereStartsWith('wire:model')->first()) }}</div>
+            class="text-danger text-sm">{{ $errors->first($attributes->whereStartsWith('wire:model')->first()) }}</div>
     @endif
 </div>
