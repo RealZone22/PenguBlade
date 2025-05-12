@@ -40,7 +40,7 @@
             <button
                 type="button"
                 @click="$wire.$set('{{ $attributes->whereStartsWith('wire:model')->first() }}', Math.max(minVal, $wire.{{ $attributes->whereStartsWith('wire:model')->first() }} - incrementAmount))"
-                class="flex h-10 items-center justify-center rounded-l-radius border border-outline bg-surface-alt px-4 py-2 text-on-surface hover:opacity-75 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-100 active:outline-offset-0 dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark dark:focus-visible:outline-primary-dark"
+                class="flex cursor-pointer h-10 items-center justify-center rounded-l-radius border border-outline bg-surface-alt px-4 py-2 text-on-surface hover:opacity-75 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-100 active:outline-offset-0 dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark dark:focus-visible:outline-primary-dark"
                 aria-label="subtract">
                 <i class="{{ $minusIcon }}"></i>
             </button>
@@ -55,7 +55,7 @@
             <button
                 type="button"
                 @click="$wire.$set('{{ $attributes->whereStartsWith('wire:model')->first() }}', Math.min(maxVal, $wire.{{ $attributes->whereStartsWith('wire:model')->first() }} + incrementAmount))"
-                class="flex h-10 items-center justify-center rounded-r-radius border border-outline bg-surface-alt px-4 py-2 text-on-surface hover:opacity-75 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-100 active:outline-offset-0 dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark dark:focus-visible:outline-primary-dark"
+                class="flex cursor-pointer h-10 items-center justify-center rounded-r-radius border border-outline bg-surface-alt px-4 py-2 text-on-surface hover:opacity-75 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-100 active:outline-offset-0 dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark dark:focus-visible:outline-primary-dark"
                 aria-label="add">
                 <i class="{{ $plusIcon }}"></i>
             </button>
