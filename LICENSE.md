@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) RealZone22 <lenny@petschl.org>
+Copyright (c) Lenny P. | RealZone22 <lenny@petschl.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

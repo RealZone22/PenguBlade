@@ -1,87 +1,47 @@
-# Blade components for PenguinUI
+<h3 align="center">PenguBlade</h3>
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/realzone22/pengublade.svg?style=flat-square)](https://packagist.org/packages/realzone22/pengublade)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/realzone22/pengublade/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/realzone22/pengublade/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/realzone22/pengublade/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/realzone22/pengublade/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/realzone22/pengublade.svg?style=flat-square)](https://packagist.org/packages/realzone22/pengublade)
+  <p align="center">
+    PenguBlade is a collection of Blade components designed to enhance your Laravel applications with beautiful and functional UI elements.
+    <br />
+    <a href="https://github.com/RealZone22/PenguBlade/wiki"><strong>📖 Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/RealZone22/PenguBlade/issues/new?labels=bug&template=bug.yml">🐛 Report Bug</a>
+    ·
+    <a href="https://github.com/RealZone22/PenguBlade/discussions/new?category=ideas">✨ Request Feature</a>
+    ·
+    <a href="https://github.com/RealZone22/PenguBlade/discussions/new?category=q-a">❓ Ask a question</a>
+  </p>
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+<div align="center">
+    <a href="https://github.com/RealZone22/PenguBlade/graphs/contributors" alt="Contributors">
+        <img src="https://img.shields.io/github/contributors/RealZone22/PenguBlade.svg?style=for-the-badge" />
+    </a>
+    <a href="https://github.com/RealZone22/PenguBlade/network/members" alt="Forks">
+        <img src="https://img.shields.io/github/forks/RealZone22/PenguBlade.svg?style=for-the-badge" />
+    </a>
+    <a href="https://github.com/RealZone22/PenguBlade/network/stargazers" alt="Stars">
+        <img src="https://img.shields.io/github/stars/RealZone22/PenguBlade.svg?style=for-the-badge" />
+    </a>
+    <a href="https://github.com/RealZone22/PenguBlade/issues" alt="Issues">
+        <img src="https://img.shields.io/github/issues/RealZone22/PenguBlade.svg?style=for-the-badge" />
+    </a>
+    <a href="https://packagist.org/packages/realzone22/pengublade" alt="Downloads">
+        <img src="https://img.shields.io/packagist/dt/realzone22/pengublade.svg?style=for-the-badge" />
+    </a>
+</div>
 
-## Support us
+<div align="center">
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/PenguBlade.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/PenguBlade)
+## Security Vulnerabilities
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can
-support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using.
-You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards
-on [our virtual postcard wall](https://spatie.be/open-source/postcards).
-
-## Installation
-
-You can install the package via composer:
-
-```bash
-composer require realzone22/pengublade
-```
-
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="pengublade-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="pengublade-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="pengublade-views"
-```
-
-## Usage
-
-```php
-$penguBlade = new RealZone22\PenguBlade();
-echo $penguBlade->echoPhrase('Hello, RealZone22!');
-```
-
-## Testing
-
-```bash
-composer test
-```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please review [our security policy](SECURITY.md) on how to report security vulnerabilities.
 
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
-
-## Credits
-
-- [RealZone22 | Lenny P.](https://github.com/RealZone22)
-- [All Contributors](../../contributors)
-
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
+</div>
