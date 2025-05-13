@@ -18,5 +18,20 @@ class PenguBladeServiceProvider extends PackageServiceProvider
             ->name('pengublade')
             ->hasConfigFile()
             ->hasViews();
+        $this->registerComponents();
+    }
+
+    public function registerComponents()
+    {
+        $this->publishes([
+            __DIR__.'/../resources/views/components' => resource_path('views/components'),
+        ], 'pengublade-components');
+
+        $dirs = array_filter(glob(__DIR__.'/../resources/views/components/*'), 'is_dir');
+        foreach ($dirs as $dir) {
+            $this->publishes([
+                $dir => resource_path('views/components/'.basename($dir)),
+            ], 'pengublade-components-'.basename($dir));
+        }
     }
 }
