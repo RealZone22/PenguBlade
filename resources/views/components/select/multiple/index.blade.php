@@ -7,6 +7,7 @@
     'chevronIcon' => 'icon-chevron-down',
     'showRequired' => true,
     'showValidation' => true,
+    'tooltip' => null,
     'selectedOptions' => []
 ])
 
@@ -66,6 +67,7 @@
     <div class="relative">
         <!-- trigger button  -->
         <button
+            @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
             type="button"
             role="combobox"
             class="inline-flex w-full cursor-pointer items-center justify-between gap-2 whitespace-nowrap border-outline bg-surface-alt px-4 py-2 text-sm font-medium capitalize tracking-wide text-on-surface transition hover:opacity-75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:text-on-surface-dark dark:focus-visible:outline-primary-dark border rounded-radius disabled:opacity-75 disabled:cursor-not-allowed"

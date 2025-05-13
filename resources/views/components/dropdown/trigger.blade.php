@@ -1,5 +1,6 @@
 @props([
     'openWithClick' => 'left',
+    'tooltip' => null,
 ])
 
 <?php
@@ -12,7 +13,7 @@ $openWithClickCode = match ($openWithClick) {
 
 ?>
 
-<div type="button"
+<div type="button" @if($tooltip) x-data x-tooltip.raw="{{ $tooltip }}" @endif
      x-on:keydown.down.prevent="openedWithKeyboard = true"
      x-on:keydown.enter.prevent="openedWithKeyboard = true"
      x-on:keydown.space.prevent="openedWithKeyboard = true"

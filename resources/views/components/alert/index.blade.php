@@ -3,6 +3,7 @@
     'message' => null,
     'icon' => null,
     'type' => 'info',
+    'tooltip' => null,
     'dismissible' => false,
     'dismissIcon' => 'icon-x',
 ])
@@ -24,7 +25,7 @@ $borderColorClass = match ($type) {
 ?>
 
 @if($dismissible)
-    <div x-data="{ alertIsVisible: true }" x-show="alertIsVisible"
+    <div x-data="{ alertIsVisible: true }" x-show="alertIsVisible" @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
          class="relative w-full overflow-hidden rounded-md border bg-surface text-on-surface dark:bg-surface-dark dark:text-on-surface-dark {{ $borderColorClass }}"
          role="alert" x-transition:leave="transition ease-in duration-300"
          x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
@@ -55,7 +56,7 @@ $borderColorClass = match ($type) {
         </div>
     </div>
 @else
-    <div
+    <div @if($tooltip) x-data x-tooltip.raw="{{ $tooltip }}" @endif
         class="relative w-full overflow-hidden rounded-md border bg-surface text-on-surface dark:bg-surface-dark dark:text-on-surface-dark {{ $borderColorClass }}"
         role="alert">
         <div {{ $attributes->twMerge('flex w-full items-center gap-2 p-4 ' . $colorClass) }}>

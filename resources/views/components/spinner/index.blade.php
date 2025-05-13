@@ -1,6 +1,7 @@
 @props([
     'color' => 'primary',
     'size' => 'md',
+    'tooltip' => null,
 ])
 
 <?php
@@ -22,6 +23,7 @@ $sizeClass = match ($size) {
 ?>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+     @if($tooltip) x-data x-tooltip.raw="{{ $tooltip }}" @endif
      aria-hidden="true" {{ $attributes->twMerge('motion-safe:animate-spin ' . $colorClass . ' ' . $sizeClass) }}>
     <path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/>
     <path

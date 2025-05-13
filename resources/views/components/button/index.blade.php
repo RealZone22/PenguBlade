@@ -4,6 +4,7 @@
     'size' => 'md',
     'link' => null,
     'loading' => null,
+    'tooltip' => null,
     'hideTextWhileLoading' => false,
     'hint' => null,
 ])
@@ -81,11 +82,13 @@
 @endphp
 
 @if($link)
-    <a {{ $attributes->twMerge($baseClass . ' ' . $variantClass . ' ' . $sizeClass) }} href="{{ $link }}">
+    <a {{ $attributes->twMerge($baseClass . ' ' . $variantClass . ' ' . $sizeClass) }} href="{{ $link }}"
+       @if($tooltip) x-data x-tooltip.raw="{{ $tooltip }}" @endif>
         {{ $slot }}
     </a>
 @else
-    <button {{ $attributes->twMerge($baseClass . ' ' . $variantClass . ' ' . $sizeClass) }}
+    <button {{ $attributes->twMerge($baseClass . ' ' . $variantClass . ' ' . $sizeClass) }} @if($tooltip) x-data
+            x-tooltip.raw="{{ $tooltip }}" @endif
             @if(!$attributes->whereStartsWith('type')->first())
                 type="button"
             @endif

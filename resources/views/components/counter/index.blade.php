@@ -11,6 +11,7 @@
     'showRequired' => true,
     'showValidation' => true,
     'uuid' => null,
+    'tooltip' => null,
 ])
 
 <div>
@@ -39,6 +40,7 @@
         <div @dblclick.prevent class="flex items-center">
             <button
                 type="button"
+                @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
                 @click="$wire.$set('{{ $attributes->whereStartsWith('wire:model')->first() }}', Math.max(minVal, $wire.{{ $attributes->whereStartsWith('wire:model')->first() }} - incrementAmount))"
                 class="flex cursor-pointer h-10 items-center justify-center rounded-l-radius border border-outline bg-surface-alt px-4 py-2 text-on-surface hover:opacity-75 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-100 active:outline-offset-0 dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark dark:focus-visible:outline-primary-dark"
                 aria-label="subtract">
@@ -50,10 +52,12 @@
                 x-bind:id="uuid"
                 type="text"
                 wire:ignore.self
+                @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
                 {{ $attributes->twMerge('border-x-none h-10 w-20 rounded-none border-y border-outline bg-surface-alt/50 text-center text-on-surface-strong focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-primary dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:text-on-surface-dark-strong dark:focus-visible:outline-primary-dark') }}/>
 
             <button
                 type="button"
+                @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
                 @click="$wire.$set('{{ $attributes->whereStartsWith('wire:model')->first() }}', Math.min(maxVal, $wire.{{ $attributes->whereStartsWith('wire:model')->first() }} + incrementAmount))"
                 class="flex cursor-pointer h-10 items-center justify-center rounded-r-radius border border-outline bg-surface-alt px-4 py-2 text-on-surface hover:opacity-75 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-100 active:outline-offset-0 dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark dark:focus-visible:outline-primary-dark"
                 aria-label="add">

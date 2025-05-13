@@ -6,6 +6,7 @@
     'hint' => null,
     'showRequired' => true,
     'showValidation' => true,
+    'tooltip' => null,
 ])
 
 <?php
@@ -37,7 +38,8 @@ $textSizeClass = match ($size) {
 
 <div x-data="{ uuid: Math.random().toString(20).substring(2, 20) }">
 
-    <label x-bind:for="uuid" class="inline-flex items-center gap-3 cursor-pointer">
+    <label x-bind:for="uuid" class="inline-flex items-center gap-3 cursor-pointer"
+           @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif>
         <input x-bind:id="uuid" type="checkbox" class="peer sr-only" role="switch" {{ $attributes->except('class') }} />
 
         @if($label && $placement == 'left')

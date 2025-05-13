@@ -2,6 +2,7 @@
     'color' => 'default',
     'type' => 'solid',
     'size' => 'sm',
+    'tooltip' => null,
 ])
 
 <?php
@@ -59,7 +60,8 @@ $sizeClass = match ($size) {
         };
         ?>
     <span
-        {{ $attributes->twMerge('w-fit inline-flex overflow-hidden rounded-radius border ' . $colorClass) }}>
+        {{ $attributes->twMerge('w-fit inline-flex overflow-hidden rounded-radius border ' . $colorClass) }} @if($tooltip) x-data
+        x-tooltip.raw="{{ $tooltip }}" @endif>
         <span class="{{ $sizeClass }} {{ $colorClassText }}">
             {{ $slot }}
         </span>

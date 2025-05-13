@@ -6,6 +6,7 @@
     'color' => 'primary',
     'showRequired' => false,
     'showValidation' => false,
+    'tooltip' => null,
 ])
 
 <?php
@@ -26,12 +27,13 @@ $colorClass = match ($color) {
         <div class="flex flex-col text-on-surface dark:text-on-surface-dark">
             <div
                 class="flex items-center justify-start gap-2 font-medium text-on-surface has-disabled:opacity-75 dark:text-on-surface-dark cursor-pointer">
-                <input x-bind:id="uuid" type="radio"
+                <input x-bind:id="uuid" type="radio" @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
                        {{ $attributes->twMerge("before:content[''] cursor-pointer relative h-4 w-4 appearance-none rounded-full border border-outline bg-surface-alt before:invisible before:absolute before:left-1/2 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full " . $colorClass) }}
                        value="">
 
                 @if($label)
-                    <label x-bind:for="uuid" class="text-sm cursor-pointer">
+                    <label x-bind:for="uuid" class="text-sm cursor-pointer"
+                           @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif>
                         {{ $label }}
 
                         @if($attributes->get('required') && $showRequired)
@@ -45,12 +47,13 @@ $colorClass = match ($color) {
     @else
         <div
             class="flex items-center justify-start gap-2 font-medium text-on-surface has-disabled:opacity-75 dark:text-on-surface-dark cursor-pointer">
-            <input x-bind:id="uuid" type="radio"
+            <input x-bind:id="uuid" type="radio" @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
                    {{ $attributes->twMerge("before:content[''] cursor-pointer relative h-4 w-4 appearance-none rounded-full border border-outline bg-surface-alt before:invisible before:absolute before:left-1/2 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full " . $colorClass) }}
                    value="">
 
             @if($label)
-                <label x-bind:for="uuid" class="text-sm cursor-pointer">
+                <label x-bind:for="uuid" class="text-sm cursor-pointer"
+                       @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif>
                     {{ $label }}
                 </label>
             @endif

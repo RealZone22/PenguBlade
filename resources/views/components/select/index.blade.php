@@ -3,6 +3,7 @@
     'hint' => null,
     'uuid' => null,
     'icon' => 'icon-chevron-down',
+    'tooltip' => null,
     'showRequired' => true,
     'showValidation' => true,
 ])
@@ -21,8 +22,8 @@
         @if($icon)
             <i class="{{ $icon }} absolute pointer-events-none right-2 top-2 size-5"></i>
         @endif
-        <select x-bind:id="uuid"
-            {{ $attributes->twMerge('w-full appearance-none rounded-radius border border-outline bg-surface-alt px-4 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-75 dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:focus-visible:outline-primary-dark') }}>
+            <select x-bind:id="uuid" @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
+                {{ $attributes->twMerge('w-full cursor-pointer appearance-none rounded-radius border border-outline bg-surface-alt px-4 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-75 dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:focus-visible:outline-primary-dark') }}>
             {{ $slot }}
         </select>
     </div>

@@ -4,6 +4,7 @@
     'icon' => 'icon-star',
     'hint' => null,
     'uuid' => null,
+    'tooltip' => null,
     'showRequired' => false,
     'showValidation' => false,
 ])
@@ -12,7 +13,7 @@
     x-data="{ currentVal: {{ $current }}, uuid: '{{ $uuid }}' ? '{{ $uuid }}' : Math.random().toString(20).substring(2, 20) }">
     <div class="flex items-center gap-1">
         @for($i = 1; $i <= $amount; $i++)
-            <label
+            <label @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
                 x-bind:for="uuid + '_' + @{{ $i }}" {{ $attributes->twMerge('transition hover:scale-125 has-focus:scale-125 cursor-pointer') }}>
                 <span class="sr-only">{{ $i }} star</span>
                 <input x-model="currentVal" x-bind:id="uuid + '_' + @{{ $i }}" type="radio" class="sr-only"

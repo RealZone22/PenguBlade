@@ -3,6 +3,7 @@
     'placeholderIcon' => null,
     'placeholderInitials' => null,
     'status' => null,
+    'tooltip' => null,
     'size' => 'md',
 ])
 
@@ -42,7 +43,9 @@ $indicatorSize = match ($size) {
 ?>
 
 @if($placeholderIcon)
-    <div {{ $attributes->twMerge('relative flex items-center justify-center rounded-full border ' . $placeholderColorClass . ' ' . $sizeClass) }}>
+    <div
+        {{ $attributes->twMerge('relative flex items-center justify-center rounded-full border ' . $placeholderColorClass . ' ' . $sizeClass) }} @if($tooltip) x-data
+        x-tooltip.raw="{{ $tooltip }}" @endif>
         <i class="{{ $placeholderIcon }}"></i>
         @if($status)
             <span
@@ -50,7 +53,9 @@ $indicatorSize = match ($size) {
         @endif
     </div>
 @elseif($placeholderInitials)
-    <div {{ $attributes->twMerge('relative flex items-center justify-center rounded-full border ' . $placeholderColorClass . ' ' . $sizeClass) }}>
+    <div
+        {{ $attributes->twMerge('relative flex items-center justify-center rounded-full border ' . $placeholderColorClass . ' ' . $sizeClass) }} @if($tooltip) x-data
+        x-tooltip.raw="{{ $tooltip }}" @endif>
         {{ $placeholderInitials }}
         @if($status)
             <span
@@ -59,12 +64,13 @@ $indicatorSize = match ($size) {
     </div>
 @else
     @if($status)
-        <div class="relative w-fit">
+        <div class="relative w-fit" @if($tooltip) x-data x-tooltip.raw="{{ $tooltip }}" @endif>
             <img {{ $attributes->twMerge('rounded-full object-cover object-center ' . $sizeClass) }}>
             <span
                 class="absolute bottom-0.5 end-0 rounded-full border-2 {{ $indicatorSize }} {{ $statusColorClass }}"></span>
         </div>
     @else
-        <img {{ $attributes->twMerge('rounded-full object-cover object-center ' . $sizeClass) }}>
+        <img {{ $attributes->twMerge('rounded-full object-cover object-center ' . $sizeClass) }} @if($tooltip) x-data
+             x-tooltip.raw="{{ $tooltip }}" @endif>
     @endif
 @endif

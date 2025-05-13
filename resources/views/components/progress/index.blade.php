@@ -3,6 +3,7 @@
     'max' => 100,
     'label' => null,
     'hint' => null,
+    'tooltip' => null,
 ])
 
 <div>
@@ -15,7 +16,7 @@
             </div>
         @endif
 
-        <div
+            <div @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
             {{ $attributes->twMerge('flex h-2.5 w-full overflow-hidden rounded-radius bg-surface-alt dark:bg-surface-dark-alt') }}
             role="progressbar" x-bind:aria-valuemin="minVal" x-bind:aria-valuemax="maxVal">
             {{ $slot }}

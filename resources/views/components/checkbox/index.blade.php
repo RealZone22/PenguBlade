@@ -6,6 +6,7 @@
     'uuid' => null,
     'size' => 'md',
     'color' => 'primary',
+    'tooltip' => null,
 ])
 
 <?php
@@ -47,7 +48,7 @@ $sizeClass = match ($size) {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
             </svg>
         </div>
-        <span class="{{ $textSizeClass }}">
+        <span class="{{ $textSizeClass }}" @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif>
             {{ $slot }}
 
             @if($attributes->get('required') && $showRequired)

@@ -3,6 +3,7 @@
     'showText' => false,
     'rounded' => true,
     'color' => 'primary',
+    'tooltip' => null,
 ])
 
 <?php
@@ -19,12 +20,14 @@ $colorClass = match ($color) {
 ?>
 
 @if($showText)
-    <div
+    <div @if($tooltip) x-data x-tooltip.raw="{{ $tooltip }}" @endif
         {{ $attributes->twMerge('h-full bg-primary text-center text-xs font-semibold leading-none ' . $colorClass . ' ' . ($rounded ? 'rounded-r-radius' : '')) }}
         x-bind:style="`width: ${calcPercentage(minVal, maxVal, {{ $value }})}%`">
         <span x-text="`${calcPercentage(minVal, maxVal, {{ $value }})}%`"></span>
     </div>
 @else
-    <div {{ $attributes->twMerge('h-full ' . $colorClass  . ' ' . ($rounded ? 'rounded-r-radius' : '')) }}
+    <div
+        {{ $attributes->twMerge('h-full ' . $colorClass  . ' ' . ($rounded ? 'rounded-r-radius' : '')) }} @if($tooltip) x-data
+        x-tooltip.raw="{{ $tooltip }}" @endif
          x-bind:style="`width: ${calcPercentage(minVal, maxVal, {{ $value }})}%`"></div>
 @endif

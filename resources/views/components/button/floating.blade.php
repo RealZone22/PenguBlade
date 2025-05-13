@@ -7,6 +7,7 @@
     'hideTextWhileLoading' => true,
     'hint' => null,
     'icon' => null,
+    'tooltip' => null,
 ])
 
 @php
@@ -59,11 +60,13 @@
 @endphp
 
 @if($link)
-    <a {{ $attributes->twMerge($baseClass . ' ' . $solidColorClass . ' ' . $sizeClass) }} href="{{ $link }}">
+    <a {{ $attributes->twMerge($baseClass . ' ' . $solidColorClass . ' ' . $sizeClass) }} href="{{ $link }}"
+       @if($tooltip) x-data x-tooltip.raw="{{ $tooltip }}" @endif>
         {{ $slot }}
     </a>
 @else
-    <button {{ $attributes->twMerge($baseClass . ' ' . $solidColorClass . ' ' . $sizeClass) }}
+    <button {{ $attributes->twMerge($baseClass . ' ' . $solidColorClass . ' ' . $sizeClass) }} @if($tooltip) x-data
+            x-tooltip.raw="{{ $tooltip }}" @endif
             @if(!$attributes->whereStartsWith('type')->first())
                 type="button"
             @endif
