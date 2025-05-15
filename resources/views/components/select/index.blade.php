@@ -2,14 +2,14 @@
     'label' => null,
     'hint' => null,
     'uuid' => null,
-    'icon' => 'icon-chevron-down',
+    'icon' => null,
     'tooltip' => null,
     'showRequired' => true,
     'showValidation' => true,
 ])
 
 <div x-data="{ uuid: '{{ $uuid }}' ? '{{ $uuid }}' : Math.random().toString(20).substring(2, 20) }">
-    <div class="relative flex w-full max-w-xs flex-col gap-1 text-on-surface dark:text-on-surface-dark">
+    <div class="relative flex w-full flex-col gap-1 text-on-surface dark:text-on-surface-dark">
         @if($label)
             <label x-bind:for="uuid" class="w-fit pl-0.5 text-sm">
                 {{ $label }}

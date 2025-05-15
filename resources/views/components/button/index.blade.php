@@ -21,7 +21,7 @@
         }
     }
 
-    $baseClass = 'whitespace-nowrap mb-0 cursor-pointer border rounded-radius text-sm font-medium tracking-wide transition hover:opacity-75 text-center focus-visible:outline-2 focus-visible:outline-offset-2 active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed';
+    $baseClass = 'inline-flex items-center justify-center whitespace-nowrap mb-0 cursor-pointer border rounded-radius text-sm font-medium tracking-wide transition hover:opacity-75 text-center focus-visible:outline-2 focus-visible:outline-offset-2 active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed box-border leading-none m-0 p-0';
 
     $sizeClass = match($size) {
         'sm' => 'px-2 py-1 text-xs',
@@ -30,13 +30,13 @@
     };
 
     $solidColorClass = match($color) {
-        'secondary' => 'bg-transparent border-secondary text-secondary dark:border-secondary-dark dark:text-secondary-dark dark:focus-visible:outline-secondary-dark',
-        'alternate' => 'bg-transparent border-outline text-outline dark:border-outline-dark dark:text-outline-dark dark:focus-visible:outline-outline-dark',
-        'inverse' => 'bg-transparent border-surface-dark text-surface-dark dark:border-surface dark:text-surface dark:focus-visible:outline-surface',
-        'info' => 'bg-transparent border-info text-info dark:border-info dark:text-info dark:focus-visible:outline-info',
-        'warning' => 'bg-transparent border-warning text-warning dark:border-warning dark:text-warning dark:focus-visible:outline-warning',
-        'success' => 'bg-transparent border-success text-success dark:border-success dark:text-success dark:focus-visible:outline-success',
-        'danger' => 'bg-transparent border-danger text-danger dark:border-danger dark:text-danger dark:focus-visible:outline-danger',
+        'secondary' => 'bg-secondary border-secondary text-on-secondary focus-visible:outline-secondary dark:bg-secondary-dark dark:border-secondary-dark dark:text-on-secondary-dark dark:focus-visible:outline-secondary-dark',
+        'alternate' => 'bg-surface-alt border-surface-alt text-on-surface-strong focus-visible:outline-surface-alt dark:bg-surface-dark-alt dark:border-surface-dark-alt dark:text-on-surface-dark-strong dark:focus-visible:outline-surface-dark-alt',
+        'inverse' => 'bg-surface-dark border-surface-dark text-on-surface-dark focus-visible:outline-surface-dark dark:bg-surface dark:border-surface dark:text-on-surface dark:focus-visible:outline-surface',
+        'info' => 'bg-info border-info text-on-info focus-visible:outline-info dark:bg-info dark:border-info dark:text-on-info dark:focus-visible:outline-info',
+        'danger' => 'bg-danger border-danger text-on-danger focus-visible:outline-danger dark:bg-danger dark:border-danger dark:text-on-danger dark:focus-visible:outline-danger',
+        'warning' => 'bg-warning border-warning text-on-warning focus-visible:outline-warning dark:bg-warning dark:border-warning dark:text-on-warning dark:focus-visible:outline-warning',
+        'success' => 'bg-success border-success text-on-success focus-visible:outline-success dark:bg-success dark:border-success dark:text-on-success dark:focus-visible:outline-success',
         default => 'bg-primary border-primary text-on-primary dark:bg-primary-dark dark:border-primary-dark dark:text-on-primary-dark dark:focus-visible:outline-primary-dark',
     };
 
@@ -99,7 +99,7 @@
         @if($loading)
             <svg wire:loading wire:target="{{ loadingTarget($attributes, $loading) }}"
                  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                 class="{{ $spinnerClass }} size-5 animate-spin motion-reduce:animate-none">
+                 class="{{ $spinnerClass }} size-5 animate-spin motion-reduce:animate-none mr-1">
                 <path opacity="0.25"
                       d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"/>
                 <path

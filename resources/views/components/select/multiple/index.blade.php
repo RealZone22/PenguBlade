@@ -13,16 +13,25 @@
 
 <div x-data="{
         uuid: '{{ $uuid }}' ? '{{ $uuid }}' : Math.random().toString(20).substring(2, 20),
-        options: {{ json_encode($options) }},
+        options: {{ json_encode(collect($options)->map(fn($option) => [
+            'value' => (string) $option['value'],
+            'label' => (string) $option['label']
+        ])->toArray()) }},
         isOpen: false,
         openedWithKeyboard: false,
-        selectedOptions: {{ json_encode($selectedOptions) }},
+        selectedOptions: @if($attributes->wire('model')->value())
+            @entangle($attributes->wire('model')->value())
+        @else
+            {{ json_encode($selectedOptions) }}
+        @endif,
         setLabelText() {
             const count = this.selectedOptions.length;
-
             if (count === 0) return '{{ $placeholder }}';
 
-            return this.selectedOptions.join(', ');
+            return this.selectedOptions.map(value => {
+                const option = this.options.find(opt => String(opt.value) === String(value));
+                return option ? option.label : value;
+            }).join(', ');
         },
         highlightFirstMatchingOption(pressedKey) {
             if (pressedKey === 'Enter') return;
@@ -39,20 +48,20 @@
             }
         },
         handleOptionToggle(option) {
+            let newSelection;
             if (option.checked) {
-                this.selectedOptions.push(option.value);
+                newSelection = [...this.selectedOptions, option.value];
             } else {
-                this.selectedOptions = this.selectedOptions.filter(
-                    (opt) => opt !== option.value,
-                );
+                newSelection = this.selectedOptions.filter(opt => String(opt) !== String(option.value));
             }
-            this.$refs.hiddenTextField.value = this.selectedOptions;
+            this.selectedOptions = newSelection;
+            this.$refs.hiddenTextField.value = newSelection;
             @if($attributes->wire('model')->value())
-                @this.set('{{ $attributes->wire('model')->value() }}', this.selectedOptions);
+                @this.set('{{ $attributes->wire('model')->value() }}', newSelection);
             @endif
         },
     }"
-     {{ $attributes->only('class')->twMerge('w-full flex flex-col') }}
+     {{ $attributes->only('class')->twMerge('w-full flex flex-col relative') }}
      x-on:keydown="highlightFirstMatchingOption($event.key)"
      x-on:keydown.esc.window="isOpen = false, openedWithKeyboard = false"
 >
@@ -65,12 +74,11 @@
         </label>
     @endif
     <div class="relative">
-        <!-- trigger button  -->
         <button
             @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
             type="button"
             role="combobox"
-            class="inline-flex w-full cursor-pointer items-center justify-between gap-2 whitespace-nowrap border-outline bg-surface-alt px-4 py-2 text-sm font-medium capitalize tracking-wide text-on-surface transition hover:opacity-75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:text-on-surface-dark dark:focus-visible:outline-primary-dark border rounded-radius disabled:opacity-75 disabled:cursor-not-allowed"
+            class="inline-flex w-full cursor-pointer items-center justify-between gap-2 whitespace-nowrap border-outline bg-surface-alt px-4 py-2 text-sm font-medium tracking-wide text-on-surface transition hover:opacity-75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:text-on-surface-dark dark:focus-visible:outline-primary-dark border rounded-radius disabled:opacity-75 disabled:cursor-not-allowed"
             aria-haspopup="listbox"
             x-bind:aria-controls="uuid + 'List'"
             x-on:click="isOpen = !isOpen"
@@ -93,13 +101,29 @@
             x-ref="hiddenTextField"
             hidden
             {{ $attributes->whereStartsWith('wire:model') }}
+            {{ $attributes->only('required') }}
+            x-bind:value="selectedOptions ? (selectedOptions.length > 0 ? selectedOptions : '') : ''"
         />
 
         <ul
             x-cloak
             x-show="isOpen || openedWithKeyboard"
             x-bind:id="uuid + 'List'"
-            class="absolute z-10 left-0 top-11 flex max-h-44 w-full flex-col overflow-hidden overflow-y-auto border-outline bg-surface-alt py-1.5 dark:border-outline-dark dark:bg-surface-dark-alt border rounded-radius"
+            class="fixed z-10 flex max-h-96 flex-col overflow-hidden overflow-y-auto border-outline bg-surface-alt py-1.5 dark:border-outline-dark dark:bg-surface-dark-alt border rounded-radius"
+            x-init="(() => {
+                const updatePosition = () => {
+                    if (isOpen) {
+                        const button = $el.closest('div').querySelector('button');
+                        const rect = button.getBoundingClientRect();
+                        $el.style.width = rect.width + 'px';
+                        $el.style.left = rect.left + 'px';
+                        $el.style.top = rect.bottom + 'px';
+                    }
+                };
+                $watch('isOpen', value => value && updatePosition());
+                window.addEventListener('resize', updatePosition);
+            })()"
+            wire:ignore
             role="listbox"
             x-on:click.outside="isOpen = false, openedWithKeyboard = false"
             x-on:keydown.down.prevent="$focus.wrap().next()"
@@ -121,7 +145,7 @@
                                 x-on:keydown.enter.prevent="$el.checked = !$el.checked; handleOptionToggle($el)"
                                 x-bind:value="item.value"
                                 x-bind:id="uuid + 'Option' + index"
-                                x-bind:checked="selectedOptions.includes(item.value)"
+                                x-bind:checked="Array.isArray(selectedOptions) && selectedOptions.map(String).includes(String(item.value))"
                                 {{ $attributes->only('disabled') }}
                             />
                             <!-- Checkmark  -->

@@ -17,7 +17,7 @@
     'length' => 16,
 ])
 
-<div class="flex w-full max-w-xs flex-col gap-1 text-on-surface dark:text-on-surface-dark"
+<div class="flex w-full flex-col gap-1 text-on-surface dark:text-on-surface-dark"
      x-data="{ uuid: Math.random().toString(20).substring(2, 20) }">
     @if($label)
         <label x-bind:for="uuid" class="w-fit pl-0.5 text-sm">

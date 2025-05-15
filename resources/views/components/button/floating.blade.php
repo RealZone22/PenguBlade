@@ -22,7 +22,7 @@
         }
     }
 
-    $baseClass = 'inline-flex justify-center items-center mb-0 aspect-square whitespace-nowrap rounded-full border font-medium tracking-wide transition hover:opacity-75 text-center';
+    $baseClass = 'inline-flex justify-center items-center cursor-pointer mb-0 aspect-square whitespace-nowrap rounded-full border font-medium tracking-wide transition hover:opacity-75 text-center';
 
     $sizeClass = match($size) {
         'sm' => 'p-2 text-xs',
@@ -62,7 +62,9 @@
 @if($link)
     <a {{ $attributes->twMerge($baseClass . ' ' . $solidColorClass . ' ' . $sizeClass) }} href="{{ $link }}"
        @if($tooltip) x-data x-tooltip.raw="{{ $tooltip }}" @endif>
-        {{ $slot }}
+        <span class="block h-full w-full flex items-center justify-center">
+            {{ $slot }}
+        </span>
     </a>
 @else
     <button {{ $attributes->twMerge($baseClass . ' ' . $solidColorClass . ' ' . $sizeClass) }} @if($tooltip) x-data
@@ -74,33 +76,35 @@
                 wire:target="{{ loadingTarget($attributes, $loading) }}" wire:loading.attr="disabled"
         @endif
     >
-        @if($loading)
-            <svg wire:loading wire:target="{{ loadingTarget($attributes, $loading) }}"
-                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                 class="{{ $textClass }} size-5 animate-spin motion-reduce:animate-none">
-                <path opacity="0.25"
-                      d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"/>
-                <path
-                    d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"/>
-            </svg>
-        @endif
+        <span class="block h-full w-full flex items-center justify-center">
+            @if($loading)
+                <svg wire:loading wire:target="{{ loadingTarget($attributes, $loading) }}"
+                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                     class="{{ $textClass }} size-5 animate-spin motion-reduce:animate-none @if(!$hideTextWhileLoading) mr-1 @endif">
+                    <path opacity="0.25"
+                          d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"/>
+                    <path
+                        d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"/>
+                </svg>
+            @endif
 
-        @if($hideTextWhileLoading)
-            <span wire:loading.remove wire:target="{{ loadingTarget($attributes, $loading) }}"
-                  class="inline-flex items-center">
-                @if($icon)
-                    <i class="{{ $icon }} {{ $iconSizeClass }} {{ $textClass }}"></i>
-                @endif
-                {{ $slot }}
-            </span>
-        @else
-            <span class="inline-flex items-center">
-                @if($icon)
-                    <i class="{{ $icon }} {{ $iconSizeClass }} {{ $textClass }}"></i>
-                @endif
-                {{ $slot }}
-            </span>
-        @endif
+            @if($hideTextWhileLoading)
+                <span wire:loading.remove wire:target="{{ loadingTarget($attributes, $loading) }}"
+                      class="inline-flex items-center justify-center">
+                    @if($icon)
+                        <i class="{{ $icon }} {{ $iconSizeClass }} {{ $textClass }}"></i>
+                    @endif
+                    {{ $slot }}
+                </span>
+            @else
+                <span class="inline-flex items-center justify-center">
+                    @if($icon)
+                        <i class="{{ $icon }} {{ $iconSizeClass }} {{ $textClass }}"></i>
+                    @endif
+                    {{ $slot }}
+                </span>
+            @endif
+        </span>
     </button>
 @endif
 
