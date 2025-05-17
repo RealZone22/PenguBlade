@@ -29,6 +29,12 @@
         default => 'px-4 py-2 text-sm',
     };
 
+    $loadingSize = match($size) {
+        'sm' => 'size-4',
+        'lg' => 'size-6',
+        default => 'size-5',
+    };
+
     $solidColorClass = match($color) {
         'secondary' => 'bg-secondary border-secondary text-on-secondary focus-visible:outline-secondary dark:bg-secondary-dark dark:border-secondary-dark dark:text-on-secondary-dark dark:focus-visible:outline-secondary-dark',
         'alternate' => 'bg-surface-alt border-surface-alt text-on-surface-strong focus-visible:outline-surface-alt dark:bg-surface-dark-alt dark:border-surface-dark-alt dark:text-on-surface-dark-strong dark:focus-visible:outline-surface-dark-alt',
@@ -99,7 +105,7 @@
         @if($loading)
             <svg wire:loading wire:target="{{ loadingTarget($attributes, $loading) }}"
                  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                 class="{{ $spinnerClass }} size-5 animate-spin motion-reduce:animate-none mr-1">
+                 class="{{ $spinnerClass }} {{ $loadingSize }} animate-spin motion-reduce:animate-none @if(!$hideTextWhileLoading) mr-1 @endif">
                 <path opacity="0.25"
                       d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"/>
                 <path
