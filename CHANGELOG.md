@@ -2,6 +2,10 @@
 
 All notable changes to `PenguBlade` will be documented in this file.
 
+## 1.0.1 - 2025-05-17
+
+**Full Changelog**: https://github.com/RealZone22/PenguBlade/compare/1.0.0...1.0.1
+
 ## 1.0.0 - 2025-05-15
 
 **Full Changelog**: https://github.com/RealZone22/PenguBlade/compare/1.0.0-beta.3...1.0.0
