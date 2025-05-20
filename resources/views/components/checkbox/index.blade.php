@@ -1,4 +1,5 @@
 @props([
+    'label' => null,
     'hint' => null,
     'showRequired' => true,
     'showValidation' => true,
@@ -48,13 +49,15 @@ $sizeClass = match ($size) {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
             </svg>
         </div>
-        <span class="{{ $textSizeClass }}" @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif>
-            {{ $slot }}
+        @if($label)
+            <span class="{{ $textSizeClass }}" @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif>
+                {{ $label }}
 
-            @if($attributes->get('required') && $showRequired)
-                <span class="text-danger">*</span>
-            @endif
-        </span>
+                @if($attributes->get('required') && $showRequired)
+                    <span class="text-danger">*</span>
+                @endif
+            </span>
+        @endif
     </label>
 
     @if($description)
