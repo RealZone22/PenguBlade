@@ -19,14 +19,14 @@
             </label>
         @endif
         @if($icon)
-            <i class="{{ $icon }} absolute left-2.5 top-1/2 text-gray-500 dark:text-neutral-500"></i>
+            <i class="{{ $icon }} absolute left-2.5 top-1/2 text-on-surface dark:text-on-surface-dark"></i>
         @endif
             <input @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
             x-bind:id="uuid" {{ $attributes->twMerge('w-full rounded-radius border border-outline bg-surface-alt px-2 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-75 dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:focus-visible:outline-primary-dark ' . ($icon ? 'pl-10' : '')) }}/>
     </div>
 
     @if($hint)
-        <p class="text-sm text-gray-500 dark:text-neutral-500">{{ $hint }}</p>
+        <p class="text-sm text-on-surface dark:text-on-surface-dark">{{ $hint }}</p>
     @endif
 
     @if($attributes->whereStartsWith('wire:model')->first() && $errors->has($attributes->whereStartsWith('wire:model')->first()) && $showValidation)

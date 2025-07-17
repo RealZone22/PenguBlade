@@ -25,6 +25,6 @@
 
 
     @if($hint)
-        <p class="mt-1 text-sm text-gray-500 dark:text-neutral-500">{{ $hint }}</p>
+        <p class="mt-1 text-sm text-on-surface dark:text-on-surface-dark">{{ $hint }}</p>
     @endif
 </div>

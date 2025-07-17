@@ -124,5 +124,5 @@
 @endif
 
 @if($hint)
-    <div class="text-gray-400 dark:text-gray-500 text-sm">{{ $hint }}</div>
+    <div class="text-on-surface dark:text-on-surface-dark text-sm">{{ $hint }}</div>
 @endif

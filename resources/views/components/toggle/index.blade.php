@@ -58,7 +58,7 @@ $textSizeClass = match ($size) {
     </label>
 
     @if($hint)
-        <p class="text-sm text-gray-500 dark:text-neutral-500">{{ $hint }}</p>
+        <p class="text-sm text-on-surface dark:text-on-surface-dark">{{ $hint }}</p>
     @endif
 
     @if($attributes->whereStartsWith('wire:model')->first() && $errors->has($attributes->whereStartsWith('wire:model')->first()) && $showValidation)

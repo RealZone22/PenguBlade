@@ -53,6 +53,22 @@
         default => 'border-primary bg-primary text-on-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:border-primary-dark dark:bg-primary-dark dark:text-on-primary-dark dark:focus-visible:outline-primary-dark',
     };
 
+    $outlineColorClass = match($color) {
+        'secondary' => 'border-secondary text-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:border-secondary-dark dark:text-secondary-dark dark:focus-visible:outline-secondary-dark',
+        'alternate' => 'border-surface-alt text-surface-alt focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface-alt active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:border-surface-dark-alt dark:text-surface-dark-alt dark:focus-visible:outline-surface-dark-alt',
+        'inverse' => 'border-surface-dark text-surface-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface-dark active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:border-surface dark:text-surface dark:focus-visible:outline-surface',
+        'info' => 'border-info text-info focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-info active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:border-info dark:text-info dark:focus-visible:outline-info',
+        'danger' => 'border-danger text-danger focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-danger active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:border-danger dark:text-danger dark:focus-visible:outline-danger',
+        'warning' => 'border-warning text-warning focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-warning active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:border-warning dark:text-warning dark:focus-visible:outline-warning',
+        'success' => 'border-success text-success focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:border-success dark:text-success dark:focus-visible:outline-success',
+        default => 'border-primary text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:border-primary-dark dark:text-primary-dark dark:focus-visible:outline-primary-dark',
+    };
+
+    $variantClass = match($variant) {
+        'outline' => $outlineColorClass,
+        default => $solidColorClass,
+    };
+
     $textClass = match($variant) {
         'secondary' => 'fill-on-secondary dark:fill-on-secondary-dark',
         'alternate' => 'fill-on-surface-strong dark:fill-on-surface-dark-strong',
@@ -66,14 +82,14 @@
 @endphp
 
 @if($link)
-    <a {{ $attributes->twMerge($baseClass . ' ' . $solidColorClass . ' ' . $sizeClass) }} href="{{ $link }}"
+    <a {{ $attributes->twMerge($baseClass . ' ' . $variantClass . ' ' . $sizeClass) }} href="{{ $link }}"
        @if($tooltip) x-data x-tooltip.raw="{{ $tooltip }}" @endif>
         <span class="block h-full w-full flex items-center justify-center">
             {{ $slot }}
         </span>
     </a>
 @else
-    <button {{ $attributes->twMerge($baseClass . ' ' . $solidColorClass . ' ' . $sizeClass) }} @if($tooltip) x-data
+    <button {{ $attributes->twMerge($baseClass . ' ' . $variantClass . ' ' . $sizeClass) }} @if($tooltip) x-data
             x-tooltip.raw="{{ $tooltip }}" @endif
             @if(!$attributes->whereStartsWith('type')->first())
                 type="button"
@@ -115,5 +131,5 @@
 @endif
 
 @if($hint)
-    <div class="text-gray-400 dark:text-gray-500 text-sm">{{ $hint }}</div>
+    <div class="text-on-surface dark:text-on-surface-dark text-sm">{{ $hint }}</div>
 @endif
