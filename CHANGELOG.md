@@ -2,6 +2,20 @@
 
 All notable changes to `PenguBlade` will be documented in this file.
 
+## 1.1.0 - 2026-01-06
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/RealZone22/PenguBlade/pull/14
+* Bump stefanzweifel/git-auto-commit-action from 5 to 7 by @dependabot[bot] in https://github.com/RealZone22/PenguBlade/pull/17
+* Bump actions/checkout from 4 to 6 by @dependabot[bot] in https://github.com/RealZone22/PenguBlade/pull/18
+
+### Breaking Changes
+
+The multi select has been reworked!
+
+**Full Changelog**: https://github.com/RealZone22/PenguBlade/compare/1.0.3...1.1.0
+
 ## 1.0.3 - 2025-07-17
 
 **Full Changelog**: https://github.com/RealZone22/PenguBlade/compare/1.0.2...1.0.3
