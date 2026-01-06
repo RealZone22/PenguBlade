@@ -6,6 +6,7 @@
     'tooltip' => null,
     'showRequired' => true,
     'showValidation' => true,
+    'placeholder' => null,
 ])
 
 <div x-data="{ uuid: '{{ $uuid }}' ? '{{ $uuid }}' : Math.random().toString(20).substring(2, 20) }">
@@ -24,12 +25,18 @@
         @endif
             <select x-bind:id="uuid" @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
                 {{ $attributes->twMerge('w-full cursor-pointer appearance-none rounded-radius border border-outline bg-surface-alt pr-5 pl-4 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-75 dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:focus-visible:outline-primary-dark') }}>
-            {{ $slot }}
+                @if($placeholder)
+                    <option value="" class="text-muted" :disabled="$attributes.get('required') ? true : false"
+                            selected>{{ $placeholder }}</option>
+                @endif
+                {{ $slot }}
         </select>
     </div>
 
     @if($hint)
-        <p class="mt-1 text-sm text-on-surface dark:text-on-surface-dark">{{ $hint }}</p>
+        <p class="text-on-surface dark:text-on-surface-dark text-xs mt-1">
+            {{ $hint }}
+        </p>
     @endif
 
     @if($attributes->whereStartsWith('wire:model')->first() && $errors->has($attributes->whereStartsWith('wire:model')->first()) && $showValidation)

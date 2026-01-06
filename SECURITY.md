@@ -11,7 +11,7 @@ discovered must be reproducible in supported versions.
 
 ## Reporting a Vulnerability
 
-Please reach out directly to `lenny@petschl.org`.
+Please reach out directly to `security@cyanfox.de`.
 
 We make every effort to respond as soon as possible, although it may take a day or two for us to sync internally and
 determine the severity of the report and its impact. Please, _do not_ use a public facing channel or GitHub issues to

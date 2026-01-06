@@ -71,6 +71,13 @@
                @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
             {{ $attributes->merge(['class' => 'w-full rounded-radius border border-outline bg-surface-alt px-2 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-75 dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:focus-visible:outline-primary-dark', 'autocomplete' => 'current-password']) }}/>
 
+        @if($showGenerate)
+            <button type="button" x-on:click="generatePassword()"
+                    class="cursor-pointer absolute @if($showToggle) right-8 @else right-2.5 @endif top-1/2 -translate-y-1/2 text-on-surface dark:text-on-surface-dark"
+                    aria-label="Generate password">
+                <i class="icon-refresh-ccw"></i>
+            </button>
+        @endif
         @if($showToggle)
             <button type="button" x-on:click="showPassword = !showPassword"
                     class="cursor-pointer absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface dark:text-on-surface-dark"
@@ -79,17 +86,12 @@
                 <i class="{{ $hideIcon }}" x-show="showPassword"></i>
             </button>
         @endif
-        @if($showGenerate)
-            <button type="button" x-on:click="generatePassword()"
-                    class="cursor-pointer absolute @if($showToggle) right-8 @else right-2.5 @endif top-1/2 -translate-y-1/2 text-on-surface dark:text-on-surface-dark"
-                    aria-label="Generate password">
-                <i class="icon-refresh-ccw"></i>
-            </button>
-        @endif
     </div>
 
     @if($hint)
-        <p class="mt-1 text-sm text-on-surface dark:text-on-surface-dark">{{ $hint }}</p>
+            <p class="text-on-surface dark:text-on-surface-dark text-xs mt-1">
+                {{ $hint }}
+            </p>
     @endif
 
     @if($attributes->whereStartsWith('wire:model')->first() && $errors->has($attributes->whereStartsWith('wire:model')->first()) && $showValidation)

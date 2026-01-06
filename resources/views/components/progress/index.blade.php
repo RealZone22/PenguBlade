@@ -23,8 +23,9 @@
         </div>
     </div>
 
-
     @if($hint)
-        <p class="mt-1 text-sm text-on-surface dark:text-on-surface-dark">{{ $hint }}</p>
+        <p class="text-on-surface dark:text-on-surface-dark text-xs mt-1">
+            {{ $hint }}
+        </p>
     @endif
 </div>

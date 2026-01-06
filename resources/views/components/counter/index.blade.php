@@ -67,7 +67,9 @@
     </div>
 
     @if($hint)
-        <p class="mt-2 text-sm text-on-surface dark:text-on-surface-dark">{{ $hint }}</p>
+        <p class="text-on-surface dark:text-on-surface-dark text-xs mt-1">
+            {{ $hint }}
+        </p>
     @endif
 
     @if($attributes->whereStartsWith('wire:model')->first() && $errors->has($attributes->whereStartsWith('wire:model')->first()) && $showValidation)

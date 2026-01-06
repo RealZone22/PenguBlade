@@ -34,5 +34,5 @@
     --color-on-danger: var(--color-white);
 
     /* border radius */
-    --radius-radius: var(--radius-md);
-}  
+    --radius-radius: var(--radius-lg);
+}
