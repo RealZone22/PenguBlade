@@ -65,7 +65,7 @@ $sizeClass = match ($size) {
     @endif
 
     @if($hint)
-        <p class="text-on-surface dark:text-on-surface-dark text-xs mt-1">
+        <p class="text-on-surface/50 dark:text-on-surface-dark/50 text-xs mt-1">
             {{ $hint }}
         </p>
     @endif
