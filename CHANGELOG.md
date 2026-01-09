@@ -2,6 +2,12 @@
 
 All notable changes to `PenguBlade` will be documented in this file.
 
+## 1.1.1 - 2026-01-09
+
+Standardize hint text styling and fix card component structure
+
+**Full Changelog**: https://github.com/RealZone22/PenguBlade/compare/1.1.0...1.1.1
+
 ## 1.1.0 - 2026-01-06
 
 ### What's Changed
