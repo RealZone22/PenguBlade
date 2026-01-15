@@ -4,19 +4,25 @@
     'showRequired' => true,
     'showValidation' => true,
     'tooltip' => null,
-    'maxSize' => 2048, // KB cinsinden varsayılan limit (2MB)
+    'maxSize' => null,
 ])
 
 <div>
     <div class="relative flex w-full flex-col gap-1"
          x-data="{
             uuid: Math.random().toString(20).substring(2, 20),
+            errorMessage: '',
             checkFileSize(event) {
+                this.errorMessage = '';
                 const file = event.target.files[0];
-                const limit = {{ $maxSize }} * 1024; // KB'ı Byte'a çeviriyoruz
-                if (file && file.size > limit) {
-                    alert('File is too large! Maximum size allowed is {{ $maxSize }}KB.');
-                    event.target.value = ''; // Seçimi temizle
+                const maxSize = {{ $maxSize ?? 'null' }};
+
+                if (file && maxSize) {
+                    const limit = maxSize * 1024;
+                    if (file.size > limit) {
+                        this.errorMessage = '{{ __("validation.size.numeric", ["attribute" => "file", "max" => $maxSize]) }}';
+                        event.target.value = '';
+                    }
                 }
             }
          }">
@@ -43,6 +49,8 @@
             {{ $hint }}
         </p>
     @endif
+
+    <div x-show="errorMessage" class="text-danger text-sm" x-text="errorMessage"></div>
 
     @if($attributes->whereStartsWith('wire:model')->first() && $errors->has($attributes->whereStartsWith('wire:model')->first()) && $showValidation)
         <div
