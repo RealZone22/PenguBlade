@@ -58,5 +58,4 @@
             {{ $hint }}
         </p>
     @endif
-
-
+</div>
