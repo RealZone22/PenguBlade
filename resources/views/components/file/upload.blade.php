@@ -7,11 +7,9 @@
     'maxSize' => null,
     'multiple' => false,
     'accept' => null,
-    'showProgress' => false,
+    'showProgress' => true,
     'progressColor' => 'primary',
     'progressText' => true,
-    'livewireUpload' => false,
-    'uploadProperty' => 'photo',
 ])
 
 <div>
@@ -48,7 +46,7 @@
             
             simulateUploadProgress() {
                 // For non-Livewire uploads, simulate progress
-                if (!this.hasWireModel && {{ $showProgress ? 'true' : 'false' }}) {
+                if (!this.hasWireModel) {
                     this.isUploading = true;
                     this.uploadProgress = 0;
                     this.uploadStartTime = Date.now();
@@ -84,18 +82,19 @@
             get uploadSpeed() {
                 if (!this.uploadStartTime || !this.isUploading) return 0;
                 const elapsed = (Date.now() - this.uploadStartTime) / 1000;
-                const avgFile = this.files.reduce((sum, file) => sum + file.size, 0) / this.files.length || 0;
+                const avgFile = this.files.reduce((sum, file) => sum + file.size, 0) / this.files.length;
                 return Math.round((avgFile * this.uploadProgress / 100) / elapsed / 1024);
             },
             
             get timeRemaining() {
                 if (!this.uploadStartTime || !this.isUploading || this.uploadProgress >= 100) return 0;
                 const elapsed = (Date.now() - this.uploadStartTime) / 1000;
-                const avgSpeed = (this.files.reduce((sum, file) => sum + file.size, 0) / this.files.length || 0) / elapsed / 1024;
-                const remainingBytes = (this.files.reduce((sum, file) => sum + file.size, 0) / this.files.length || 0) * (1 - this.uploadProgress / 100);
+                const avgSpeed = (this.files.reduce((sum, file) => sum + file.size, 0) / this.files.length) / elapsed / 1024;
+                const remainingBytes = (this.files.reduce((sum, file) => sum + file.size, 0) / this.files.length) * (1 - this.uploadProgress / 100);
                 return Math.round(remainingBytes / 1024 / avgSpeed);
             }
          }">
+         
         @if($label)
             <label class="w-fit pl-0.5 text-sm text-on-surface dark:text-on-surface-dark" x-bind:for="uuid">
                 {{ $label }}
@@ -106,13 +105,11 @@
             </label>
         @endif
 
-
         <div class="relative">
             <input x-bind:id="uuid"
                    type="file"
                    @if($multiple) multiple @endif
                    @if($accept) accept="{{ $accept }}" @endif
-                   @if($livewireUpload) wire:upload.{{ $uploadProperty }} wire:upload.progress.{{ $uploadProperty }}="uploadProgress" @endif
                    @change="handleFileChange($event)"
                    @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
                    {{ $attributes->twMerge('w-full overflow-clip rounded-radius border border-outline bg-surface-alt/50 text-sm text-on-surface file:mr-4 file:border-none file:bg-surface-alt file:px-4 file:py-2 file:font-medium file:text-on-surface-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-75 dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:text-on-surface-dark dark:file:bg-surface-dark-alt dark:file:text-on-surface-dark-strong dark:focus-visible:outline-primary-dark') }}/>
@@ -156,19 +153,15 @@
             @endif
         </div>
 
-                @if($showValidation)
+        @if($showValidation)
             <div class="text-danger text-sm">
                 <span x-show="errorMessage" x-text="errorMessage" x-cloak></span>
-                @if($livewireUpload)
-                    @error($uploadProperty)
-                        <span x-show="!errorMessage">{{ $message }}</span>
-                    @enderror
-                @elseif($attributes->whereStartsWith('wire:model')->first() && $errors->has($attributes->whereStartsWith('wire:model')->first()))
+                @if($attributes->whereStartsWith('wire:model')->first() && $errors->has($attributes->whereStartsWith('wire:model')->first()))
                     <span x-show="!errorMessage" x-cloak>{{ $errors->first($attributes->whereStartsWith('wire:model')->first()) }}</span>
                 @endif
             </div>
         @endif
-            </div>
+    </div>
 
     @if($hint)
         <p class="text-on-surface/50 dark:text-on-surface-dark/50 text-xs mt-1">

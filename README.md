@@ -33,6 +33,61 @@
 
 <div align="center">
 
+## Features
+
+- 🎨 **Beautiful UI Components** - Based on PenguinUI design system
+- 📱 **Responsive Design** - Works perfectly on all screen sizes
+- 🌙 **Dark Mode Support** - Built-in dark mode compatibility
+- ⚡ **Livewire Integration** - Seamless Livewire component support
+- 📊 **File Upload Progress** - Real-time file upload progress indicators
+- 🎯 **Accessibility** - WCAG compliant components
+- 🔧 **Customizable** - Easy to customize with Tailwind CSS
+
+## File Upload Components
+
+PenguBlade now includes advanced file upload components with progress bar support:
+
+### Basic File Upload with Progress
+
+```blade
+<x-file.upload 
+    label="Choose a file"
+    hint="Maximum file size: 5MB"
+    max-size="5120"
+    show-progress
+    progress-color="primary" />
+```
+
+### Livewire File Upload
+
+```blade
+<x-file.livewire-upload 
+    label="Upload document"
+    upload-property="document"
+    show-progress
+    progress-color="success" />
+```
+
+### Multiple File Upload
+
+```blade
+<x-file.upload 
+    label="Choose multiple files"
+    multiple
+    show-progress
+    progress-color="info" />
+```
+
+#### Features:
+- ✅ Real-time progress tracking
+- ✅ File size validation
+- ✅ Multiple file support
+- ✅ Livewire integration
+- ✅ Upload speed calculation
+- ✅ Time remaining estimation
+- ✅ Customizable progress colors
+- ✅ Error handling
+
 ## Security Vulnerabilities
 
 Please review [our security policy](SECURITY.md) on how to report security vulnerabilities.

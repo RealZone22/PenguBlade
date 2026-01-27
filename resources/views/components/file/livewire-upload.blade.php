@@ -7,10 +7,9 @@
     'maxSize' => null,
     'multiple' => false,
     'accept' => null,
-    'showProgress' => false,
+    'showProgress' => true,
     'progressColor' => 'primary',
     'progressText' => true,
-    'livewireUpload' => false,
     'uploadProperty' => 'photo',
 ])
 
@@ -46,56 +45,69 @@
                 return true;
             },
             
-            simulateUploadProgress() {
-                // For non-Livewire uploads, simulate progress
-                if (!this.hasWireModel && {{ $showProgress ? 'true' : 'false' }}) {
-                    this.isUploading = true;
-                    this.uploadProgress = 0;
-                    this.uploadStartTime = Date.now();
+            handleFileUpload(event) {
+                if (!this.checkFileSize(event)) return;
+                
+                const fileInput = event.target;
+                const files = Array.from(fileInput.files);
+                
+                if (files.length === 0) return;
+                
+                this.isUploading = true;
+                this.uploadProgress = 0;
+                this.uploadStartTime = Date.now();
+                
+                // Listen for Livewire upload progress
+                if (window.Livewire) {
+                    window.Livewire.hook('component.initialized', (component) => {
+                        // Component initialized
+                    });
                     
-                    const interval = setInterval(() => {
-                        if (this.uploadProgress < 90) {
-                            this.uploadProgress += Math.random() * 15;
-                        } else {
-                            clearInterval(interval);
-                            // Complete upload after a short delay
-                            setTimeout(() => {
-                                this.uploadProgress = 100;
-                                setTimeout(() => {
-                                    this.isUploading = false;
-                                    this.uploadProgress = 0;
-                                }, 500);
-                            }, 200);
+                    // Listen for upload progress events
+                    window.addEventListener('livewire:upload-progress', (event) => {
+                        if (event.detail.property === '{{ $uploadProperty }}') {
+                            this.uploadProgress = event.detail.progress;
                         }
-                    }, 100);
+                    });
+                    
+                    window.addEventListener('livewire:upload-finished', (event) => {
+                        if (event.detail.property === '{{ $uploadProperty }}') {
+                            this.uploadProgress = 100;
+                            setTimeout(() => {
+                                this.isUploading = false;
+                                this.uploadProgress = 0;
+                                fileInput.value = '';
+                            }, 500);
+                        }
+                    });
+                    
+                    window.addEventListener('livewire:upload-error', (event) => {
+                        if (event.detail.property === '{{ $uploadProperty }}') {
+                            this.errorMessage = event.detail.errors?.[0] || 'Upload failed';
+                            this.isUploading = false;
+                            this.uploadProgress = 0;
+                            fileInput.value = '';
+                        }
+                    });
                 }
-            },
-            
-            handleFileChange(event) {
-                if (this.checkFileSize(event)) {
-                    this.simulateUploadProgress();
-                }
-            },
-            
-            get hasWireModel() {
-                return {{ $attributes->whereStartsWith('wire:model')->first() ? 'true' : 'false' }};
             },
             
             get uploadSpeed() {
                 if (!this.uploadStartTime || !this.isUploading) return 0;
                 const elapsed = (Date.now() - this.uploadStartTime) / 1000;
-                const avgFile = this.files.reduce((sum, file) => sum + file.size, 0) / this.files.length || 0;
+                const avgFile = this.files.reduce((sum, file) => sum + file.size, 0) / this.files.length;
                 return Math.round((avgFile * this.uploadProgress / 100) / elapsed / 1024);
             },
             
             get timeRemaining() {
                 if (!this.uploadStartTime || !this.isUploading || this.uploadProgress >= 100) return 0;
                 const elapsed = (Date.now() - this.uploadStartTime) / 1000;
-                const avgSpeed = (this.files.reduce((sum, file) => sum + file.size, 0) / this.files.length || 0) / elapsed / 1024;
-                const remainingBytes = (this.files.reduce((sum, file) => sum + file.size, 0) / this.files.length || 0) * (1 - this.uploadProgress / 100);
+                const avgSpeed = (this.files.reduce((sum, file) => sum + file.size, 0) / this.files.length) / elapsed / 1024;
+                const remainingBytes = (this.files.reduce((sum, file) => sum + file.size, 0) / this.files.length) * (1 - this.uploadProgress / 100);
                 return Math.round(remainingBytes / 1024 / avgSpeed);
             }
          }">
+         
         @if($label)
             <label class="w-fit pl-0.5 text-sm text-on-surface dark:text-on-surface-dark" x-bind:for="uuid">
                 {{ $label }}
@@ -106,14 +118,14 @@
             </label>
         @endif
 
-
         <div class="relative">
             <input x-bind:id="uuid"
                    type="file"
                    @if($multiple) multiple @endif
                    @if($accept) accept="{{ $accept }}" @endif
-                   @if($livewireUpload) wire:upload.{{ $uploadProperty }} wire:upload.progress.{{ $uploadProperty }}="uploadProgress" @endif
-                   @change="handleFileChange($event)"
+                   wire:upload.{{ $uploadProperty }}
+                   wire:upload.progress.{{ $uploadProperty }}="uploadProgress"
+                   @change="handleFileUpload($event)"
                    @if($tooltip) x-tooltip.raw="{{ $tooltip }}" @endif
                    {{ $attributes->twMerge('w-full overflow-clip rounded-radius border border-outline bg-surface-alt/50 text-sm text-on-surface file:mr-4 file:border-none file:bg-surface-alt file:px-4 file:py-2 file:font-medium file:text-on-surface-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-75 dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:text-on-surface-dark dark:file:bg-surface-dark-alt dark:file:text-on-surface-dark-strong dark:focus-visible:outline-primary-dark') }}/>
 
@@ -156,19 +168,15 @@
             @endif
         </div>
 
-                @if($showValidation)
+        @if($showValidation)
             <div class="text-danger text-sm">
                 <span x-show="errorMessage" x-text="errorMessage" x-cloak></span>
-                @if($livewireUpload)
-                    @error($uploadProperty)
-                        <span x-show="!errorMessage">{{ $message }}</span>
-                    @enderror
-                @elseif($attributes->whereStartsWith('wire:model')->first() && $errors->has($attributes->whereStartsWith('wire:model')->first()))
-                    <span x-show="!errorMessage" x-cloak>{{ $errors->first($attributes->whereStartsWith('wire:model')->first()) }}</span>
-                @endif
+                @error($uploadProperty)
+                    <span x-show="!errorMessage">{{ $message }}</span>
+                @enderror
             </div>
         @endif
-            </div>
+    </div>
 
     @if($hint)
         <p class="text-on-surface/50 dark:text-on-surface-dark/50 text-xs mt-1">
