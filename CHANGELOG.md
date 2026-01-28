@@ -2,6 +2,18 @@
 
 All notable changes to `PenguBlade` will be documented in this file.
 
+## 1.3.0 - 2026-01-28
+
+### What's Changed
+
+* Add file upload progress bar support with Livewire integration by @chetanupare in https://github.com/RealZone22/PenguBlade/pull/23
+
+### New Contributors
+
+* @chetanupare made their first contribution in https://github.com/RealZone22/PenguBlade/pull/23
+
+**Full Changelog**: https://github.com/RealZone22/PenguBlade/compare/1.2.0...1.3.0
+
 ## 1.2.0 - 2026-01-15
 
 ### What's Changed
