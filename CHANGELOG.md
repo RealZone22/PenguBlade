@@ -2,6 +2,15 @@
 
 All notable changes to `PenguBlade` will be documented in this file.
 
+## 1.3.1 - 2026-03-05
+
+### What's Changed
+
+* Remove overflow-hidden class from card component by @RealZone22 in https://github.com/RealZone22/PenguBlade/pull/26
+* Add live update support to multi select by @RealZone22 in https://github.com/RealZone22/PenguBlade/pull/27
+
+**Full Changelog**: https://github.com/RealZone22/PenguBlade/compare/1.3.0...1.3.1
+
 ## 1.3.0 - 2026-01-28
 
 ### What's Changed
