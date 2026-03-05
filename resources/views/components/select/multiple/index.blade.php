@@ -14,8 +14,11 @@
 
 @php
     $uuid = $attributes->get('id') ?? 'multiselect-' . str()->random(8);
-    $wireModel = $attributes->wire('model')->value();
-    $inputName = $name ?? $wireModel ?? $uuid;
+    $wireModel = $attributes->wire('model');
+    $wireModelValue = $wireModel->value();
+    $wireModelModifiers = $wireModel->modifiers()->toArray();
+    $wireModelModifierString = !empty($wireModelModifiers) ? '.' . implode('.', $wireModelModifiers) : '';
+    $inputName = $name ?? $wireModelValue ?? $uuid;
 @endphp
 
 <div
@@ -24,7 +27,7 @@
         isOpen: false,
         openedWithKeyboard: false,
         options: [],
-        selectedOptions: @if($wireModel) @entangle($wireModel) @else {{ json_encode(array_map('strval', (array) $value)) }} @endif,
+        selectedOptions: @if($wireModelValue) @entangle($wireModelValue){{ $wireModelModifierString }} @else {{ json_encode(array_map('strval', (array) $value)) }} @endif,
 
         init() {
             this.parseOptions();
@@ -276,7 +279,7 @@
     @endif
 
     @if($showValidation)
-        @error($wireModel ?? $inputName)
+        @error($wireModelValue ?? $inputName)
         <div class="text-danger text-sm mt-1">{{ $message }}</div>
         @enderror
     @endif
