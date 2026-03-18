@@ -19,7 +19,7 @@
         "php": "^8.2",
         "spatie/laravel-package-tools": "^1.16",
         "illuminate/contracts": "^10.0||^11.0||^12.0||^13.0",
-        "gehrisandro/tailwind-merge-laravel": "^1.0"
+        "gehrisandro/tailwind-merge-laravel": "dev-l13-compatibility"
     },
     "require-dev": {
         "laravel/pint": "^1.14",
@@ -69,6 +69,12 @@
             }
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/laravel-shift/tailwind-merge-laravel.git"
+        }
+    ],
     "minimum-stability": "stable",
     "prefer-stable": true
 }
