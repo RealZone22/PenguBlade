@@ -2,6 +2,14 @@
 
 All notable changes to `PenguBlade` will be documented in this file.
 
+## 1.3.2 - 2026-03-18
+
+### What's Changed
+
+* Add Laravel 13 support by @RealZone22 in https://github.com/RealZone22/PenguBlade/pull/29
+
+**Full Changelog**: https://github.com/RealZone22/PenguBlade/compare/1.3.1...1.3.2
+
 ## 1.3.1 - 2026-03-05
 
 ### What's Changed
