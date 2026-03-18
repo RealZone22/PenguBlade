@@ -2,6 +2,14 @@
 
 All notable changes to `PenguBlade` will be documented in this file.
 
+## 1.3.2-twmerge-fix - 2026-03-18
+
+### What's Changed
+
+* Update tailwind-merge-laravel dependency version by @RealZone22 in https://github.com/RealZone22/PenguBlade/pull/30
+
+**Full Changelog**: https://github.com/RealZone22/PenguBlade/compare/1.3.2...1.3.2-twmerge-fix
+
 ## 1.3.2 - 2026-03-18
 
 ### What's Changed
