@@ -86,6 +86,7 @@ class Modal extends Component
         }
 
         if (enum_exists($parameterClassName)) {
+            // @phpstan-ignore-next-line
             $enum = $parameterClassName::tryFrom($parameterValue);
 
             if ($enum !== null) {
@@ -106,6 +107,7 @@ class Modal extends Component
     {
         return collect($component->all())
             ->map(function ($value, $name) use ($component) {
+                // @phpstan-ignore-next-line
                 return Reflector::getParameterClassName(new \ReflectionProperty($component, $name));
             })
             ->filter();
