@@ -4,6 +4,4 @@
 
 namespace RealZone22\PenguBlade\Contracts;
 
-interface ModalComponent
-{
-}
+interface ModalComponent {}

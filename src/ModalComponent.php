@@ -22,13 +22,16 @@ abstract class ModalComponent extends Component implements Contract
         '6xl' => 'sm:max-w-md md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl',
         '7xl' => 'sm:max-w-md md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl',
     ];
+
     public bool $forceClose = false;
+
     public int $skipModals = 0;
+
     public bool $destroySkipped = false;
 
     public static function modalMaxWidthClass(): string
     {
-        if (!array_key_exists(static::modalMaxWidth(), static::$maxWidths)) {
+        if (! array_key_exists(static::modalMaxWidth(), static::$maxWidths)) {
             throw new InvalidArgumentException(
                 sprintf('Modal max width [%s] is invalid. The width must be one of the following [%s].',
                     static::modalMaxWidth(), implode(', ', array_keys(static::$maxWidths))),

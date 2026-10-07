@@ -13,6 +13,7 @@ use Illuminate\View\View;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Livewire\Mechanisms\ComponentRegistry;
+use RealZone22\PenguBlade\Contracts\ModalComponent;
 use ReflectionClass;
 
 class Modal extends Component
@@ -31,7 +32,7 @@ class Modal extends Component
 
     public function openModal($modalComponent, $arguments = [], $modalAttributes = []): void
     {
-        $requiredInterface = \RealZone22\PenguBlade\Contracts\ModalComponent::class;
+        $requiredInterface = ModalComponent::class;
         $componentClass = $this->resolveComponentClass($modalComponent);
         $reflect = new ReflectionClass($componentClass);
 
@@ -42,9 +43,8 @@ class Modal extends Component
         $id = md5($modalComponent.serialize($arguments));
 
         $arguments = collect($arguments)
-            ->merge($this->resolveComponentProps($arguments, new $componentClass()))
+            ->merge($this->resolveComponentProps($arguments, new $componentClass))
             ->all();
-
 
         $this->components[$id] = [
             'name' => $modalComponent,
@@ -85,10 +85,10 @@ class Modal extends Component
             return $parameterValue;
         }
 
-        if(enum_exists($parameterClassName)){
+        if (enum_exists($parameterClassName)) {
             $enum = $parameterClassName::tryFrom($parameterValue);
 
-            if($enum !== null){
+            if ($enum !== null) {
                 return $enum;
             }
         }
@@ -96,7 +96,7 @@ class Modal extends Component
         $instance = app()->make($parameterClassName);
 
         if (! $model = $instance->resolveRouteBinding($parameterValue)) {
-            throw (new ModelNotFoundException())->setModel(get_class($instance), [$parameterValue]);
+            throw (new ModelNotFoundException)->setModel(get_class($instance), [$parameterValue]);
         }
 
         return $model;
@@ -118,8 +118,8 @@ class Modal extends Component
 
     protected function resolveComponentClass(string $component): string
     {
-        if (class_exists(\Livewire\Mechanisms\ComponentRegistry::class)) {
-            return app(\Livewire\Mechanisms\ComponentRegistry::class)->getClass($component);
+        if (class_exists(ComponentRegistry::class)) {
+            return app(ComponentRegistry::class)->getClass($component);
         }
 
         return app('livewire.factory')->resolveComponentClass($component);
