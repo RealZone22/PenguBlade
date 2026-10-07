@@ -2,6 +2,7 @@
 
 namespace RealZone22\PenguBlade;
 
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -16,6 +17,7 @@ class PenguBladeServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('pengublade')
+            ->hasConfigFile()
             ->hasViews();
 
         $this->registerComponents();
@@ -33,5 +35,11 @@ class PenguBladeServiceProvider extends PackageServiceProvider
                 $dir => resource_path('views/components/'.basename($dir)),
             ], 'pengublade-components-'.basename($dir));
         }
+
+        $this->publishes([
+            __DIR__.'/../resources/views/modal.blade.php' => resource_path('views/vendor/pengublade/modal.blade.php'),
+        ], 'pengublade-modal-view');
+
+        Livewire::component('pengublade-modal', Modal::class);
     }
 }
