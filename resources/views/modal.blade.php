@@ -193,6 +193,7 @@
         style="display: none;"
         role="dialog"
         aria-modal="true"
+        wire:transition
     >
         <div
             x-show="show"
