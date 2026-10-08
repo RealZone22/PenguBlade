@@ -43,6 +43,19 @@
                 attributes: true,
                 attributeFilter: ['disabled', 'value']
             });
+
+            Livewire.hook('morph.updated', ({ el }) => {
+                if (this.$el.contains(el) || this.$el === el) {
+                    this.$nextTick(() => {
+                        this.parseOptions();
+                        this.updateHiddenInputs();
+
+                        if (this.isOpen) {
+                            this.updatePosition();
+                        }
+                    });
+                }
+            });
         },
 
         parseOptions() {
@@ -227,7 +240,7 @@
             ></i>
         </button>
 
-        <template x-teleport="body">
+        <template x-teleport="body" wire:ignore>
             <div
                 x-cloak
                 x-show="isOpen || openedWithKeyboard"
