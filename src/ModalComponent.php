@@ -43,7 +43,7 @@ abstract class ModalComponent extends Component implements Contract
 
     public static function modalMaxWidth(): string
     {
-        return config('pengublade.component_defaults.modal_max_width', '2xl');
+        return config('pengublade.component_defaults.modal_max_width', 'md');
     }
 
     public static function closeModalOnClickAway(): bool

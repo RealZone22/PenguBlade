@@ -21,7 +21,7 @@
         }
     }
 
-    $baseClass = 'inline-flex items-center justify-center whitespace-nowrap mb-0 cursor-pointer border rounded-radius text-sm font-medium tracking-wide transition hover:opacity-75 text-center focus-visible:outline-2 focus-visible:outline-offset-2 active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed box-border leading-none m-0 p-0';
+    $baseClass = 'w-full inline-flex items-center justify-center whitespace-nowrap mb-0 cursor-pointer border rounded-radius text-sm font-medium tracking-wide transition hover:opacity-75 text-center focus-visible:outline-2 focus-visible:outline-offset-2 active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed box-border leading-none m-0 p-0';
 
     $sizeClass = match($size) {
         'sm' => 'px-2 py-1 text-xs',
@@ -87,7 +87,7 @@
     };
 @endphp
 
-<div>
+<div class="flex-1 w-full">
     @if($link)
         <a {{ $attributes->twMerge($baseClass . ' ' . $variantClass . ' ' . $sizeClass) }} href="{!! $link !!}"
            @if($tooltip) x-data x-tooltip.raw="{{ $tooltip }}" @endif>
@@ -125,7 +125,7 @@
     @endif
 
     @if($hint)
-            <p class="text-on-surface/50 dark:text-on-surface-dark/50 text-xs mt-1">
+        <p class="text-on-surface/50 dark:text-on-surface-dark/50 text-xs mt-1">
             {{ $hint }}
         </p>
     @endif
