@@ -189,7 +189,7 @@
         }
     }"
     wire:ignore.self
-    {{ $attributes->only('class')->twMerge('w-full flex flex-col relative') }}
+    {{ $attributes->only('class')->twMerge('w-full min-w-0 flex flex-col relative') }}
     x-on:keydown="highlightFirstMatchingOption($event.key)"
     x-on:keydown.esc.window="closeListbox()"
     x-on:resize.window="if (isOpen) updatePosition()"
@@ -218,7 +218,7 @@
         type="button"
             role="combobox"
             id="{{ $uuid }}"
-            class="inline-flex w-full cursor-pointer items-center justify-between gap-2 whitespace-nowrap border-outline bg-surface-alt px-4 py-2 text-sm font-medium tracking-wide text-on-surface transition hover:opacity-75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:text-on-surface-dark dark:focus-visible:outline-primary-dark border rounded-radius disabled:opacity-75 disabled:cursor-not-allowed"
+            class="inline-flex w-full min-w-0 cursor-pointer items-center justify-between gap-2 whitespace-nowrap border-outline bg-surface-alt px-4 py-2 text-sm font-medium tracking-wide text-on-surface transition hover:opacity-75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:text-on-surface-dark dark:focus-visible:outline-primary-dark border rounded-radius disabled:opacity-75 disabled:cursor-not-allowed"
             aria-haspopup="listbox"
             x-bind:aria-controls="uuid + '-list'"
             x-ref="trigger"
@@ -231,11 +231,11 @@
             {{ $attributes->only('disabled') }}
         >
             <span
-                class="text-sm w-full font-normal text-start overflow-hidden text-ellipsis whitespace-nowrap"
+                class="min-w-0 flex-1 text-sm font-normal text-start overflow-hidden text-ellipsis whitespace-nowrap"
                 x-text="setLabelText()"
             ></span>
             <i
-                class="{{ $chevronIcon }} size-5 transition-transform duration-200"
+                class="{{ $chevronIcon }} size-5 shrink-0 transition-transform duration-200"
                 x-bind:class="{ 'rotate-90': isOpen }"
             ></i>
         </button>
