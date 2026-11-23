@@ -53,7 +53,7 @@
         default => 'border-primary bg-primary text-on-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:border-primary-dark dark:bg-primary-dark dark:text-on-primary-dark dark:focus-visible:outline-primary-dark',
     };
 
-    $textClass = match($variant) {
+    $textClass = match($color) {
         'secondary' => 'fill-on-secondary dark:fill-on-secondary-dark',
         'alternate' => 'fill-on-surface-strong dark:fill-on-surface-dark-strong',
         'inverse' => 'fill-on-surface-dark dark:fill-on-surface',
